@@ -83,7 +83,7 @@ systemctl enable dhcpcd
 pacman -S alsa-utils pulseaudio pulseaudio-alsa
 #安装中文输入法
 pacman -S fcitx-rime fcitx-im kcm-fcitx
-编辑
+#编辑
 vim /home/asters/.xprofile
 echo "export LANG=zh_CN.UTF-8" >> /home/asters/.xprofile    
 
