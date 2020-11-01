@@ -1,0 +1,194 @@
+===================安装arch系统=====================
+
+!!!!!!!首先保证网络连通。ping baidu.com
+
+
+============准备工作========
+更改字体
+setfont /usr/share/kbd/consolefonts/LatGrkCyr-12x22.psfu.gz
+
+分区
+fdisk -l ==>查看分区
+fdisk /dev/sda 进入sda
+
+sda1:n+回车x2 大小 至少512M
+sda2:n+回车x3 大小 4G
+sda1:n+回车x2 大小 全部
+
+格式化
+mkfs.fat -F32 /dev/sda1
+mkswap /dev/sda2
+mkfs.ext4 /dev/sda3
+
+w 写入
+
+交换分区初始化 
+swapon
+
+#配置源
+vim /etc/pacman.conf
+#进入软件源
+vim /etc/pacman.d/mirrorlist
+
+正式安装===> arch linux
+
+挂载：mount /dev/sda3 /mnt   <=====主分区
+mkdir /mnt/boot
+mount /dev/sda1 /mnt/boot   <=====引导分区
+
+安装arch
+pacstrap /mnt base linux linux-firmware base-devel
+
+生成fstab文件
+genfstab -U /mnt >> /mnt/etc/fstab
+
+进入系统
+arch-chroot /mnt
+
+修改时区
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+查看时区
+date -R 
+
+同步系统时间
+hwclock --systohc
+
+安装vim
+pacman -S vim
+
+===============本地化==================
+
+
+vim /etc/locale.gen
+把en_US.UTF-8 UTF-8前面的#去掉
+把zh_CN.UTF-8 UTF-8前面的#去掉
+
+初始化locale-gen
+locale-gen
+编辑系统语言
+vim /etc/locale.conf
+增加 LANG = en_US.UTF-8
+
+配置grub时的命令
+vim /etc/vconsole.conf
+
+增加：
+    keycode 1 = Caps_Lock                                                                             
+    keycode 58 = Eacape
+
+==========网络配置===============
+
+配置主机名
+vim /etc/hostname
+增加
+    asters
+    
+配置hosts
+vim /etc/hosts
+增加
+127.0.0.1       localhost
+::1             localhost
+127.0.0.1       asters.localdomain asters
+   
+199.232.69.194 github.global.ssl.fastly.net
+140.82.114.4 github.com
+   
+199.232.68.133 raw.githubusercontent.com
+199.232.68.133 raw.github.com
+
+更改root密码
+passwd
+
+========引导=============
+安装grub引导
+pacman -S grub efibootmgr intel-ucode os-prober amd-ucode 
+
+创建grub文件夹
+mkdir /boot/grub
+
+创建grub.cfg文件
+grub-mkconfig > /boot/grub/grub.cfg
+
+确认系统架构 uname -m 
+
+grub-install --target=x86_64-efi --efi-directory=/boot
+
+安装基本软件
+
+pacman -S wpa_supplicant dhcpcd
+
+重启拔掉U盘
+
+
+
+
+
+更新
+pacman -Syy
+pacman -S xrog
+中文字体
+pacman -S ttf-dejavu wqy-microhei
+添加普通用户
+useradd -m -g users -G wheel -s /bin/bash asters
+passwd asters   
+提权
+pacman -S sudo
+ln -s /usr/bin/vim /usr/bin/vi
+visudo ====> 将#%wheel ALL=(ALL) 的#删除掉
+
+
+
+安装KDE
+
+pacman -S plasma kde-applications
+
+安装图形登陆界面
+pacman -S sddm sddm-kcm
+开机自启sddm
+systemctl enable sddm
+安装网络管理和相关工具
+pacman -S networkmanager net-tools
+开机自启
+systemctl enable NeteorkManager
+systemctl enable dhcpcd
+安装声音
+pacman -S alsa-utils pulseaudio pulseaudio-alsa
+安装中文输入法
+pacman -S fcitx-rime fcitx-im kcm-fcitx
+编辑
+vim /home/asters/.xprofile
+增加
+    export LANG=zh_CN.UTF-8
+    export LC_ALL=zh_CN.UTF-8
+    export GTK_IM_MODULE=fcitx
+    export QT_IM_MODULE=fcitx
+    export XMODIFIERS="@im=fcitx"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
