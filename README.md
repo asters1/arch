@@ -1,4 +1,6 @@
 ＃记录arch安装
+
+
 arch_init.sh是用于安装arch的准备工作。
 包括分区，换源，安装linux。
 
