@@ -84,7 +84,7 @@ pacman -S alsa-utils pulseaudio pulseaudio-alsa
 #安装中文输入法
 pacman -S fcitx-rime fcitx-im kcm-fcitx
 #编辑
-vim /home/asters/.xprofile
+
 echo "export LANG=zh_CN.UTF-8" >> /home/asters/.xprofile    
 
 echo "export LC_ALL=zh_CN.UTF-8" >> /home/asters/.xprofile    
@@ -97,4 +97,4 @@ echo "export XMODIFIERS="@im=fcitx"" >> /home/asters/.xprofile
 
 echo "将#%wheel ALL=(ALL) 的#删除掉"
 
-visudo 
+
