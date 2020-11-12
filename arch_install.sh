@@ -77,7 +77,7 @@ systemctl enable sddm
 #安装网络管理和相关工具
 pacman -S networkmanager net-tools
 #开机自启
-systemctl enable NeteorkManager
+systemctl enable NetworkManager
 systemctl enable dhcpcd
 #安装声音
 pacman -S alsa-utils pulseaudio pulseaudio-alsa
