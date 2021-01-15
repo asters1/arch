@@ -140,7 +140,7 @@ EOF
 echo -e "
 ############${Font_Blue}INSTALL ARCH MENU${Font_suffix}####################"
 echo -e "${Msg_Info}Select the function to use: "
-echo -e " 1. Check Network  \n 2. Set Disk \n 3. Set Mirrorlist \n 4.  One Click Install Arch \n 5. Install linux base \n 6. Init Arch \n 0. Exit \n";read -p "Input Number:" Function
+echo -e " 1. Check Network  \n 2. Set Disk \n 3. Set Mirrorlist \n 4.  One Click Install Arch \n 5. Install linux base \n 6. Init Arch \n 7. Wget Linuxinit \n 0. Exit \n";read -p "Input Number:" Function
 
 if [ "${Function}" = "1" ];then
 	function_Check_Network
