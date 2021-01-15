@@ -128,9 +128,10 @@ exit
 EOF
 }
 function_Init_Arch(){
-	arch-chroot /mnt <<EOF
-curl -o 
-exit
+curl -O https://raw.githubusercontent.com/asters1/arch/master/linuxinit.sh
+mv ./linuxinit.sh /mnt
+arch-chroot /mnt <<EOF
+bash /linuxinit.sh 
 EOF
 }
 
@@ -156,6 +157,8 @@ elif [ "${Function}" = "5" ];then
 	function_Install_Linux_base
 elif [ "${Function}" = "6" ];then
 	function_Init_Network
+elif [ "${Function}" = "7" ];then
+
 else
 	exit 0
 fi
