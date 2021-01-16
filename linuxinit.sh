@@ -104,7 +104,7 @@ grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
 }
 function_Install_Software(){
-pacman -S --needed --noconfirm networkmanager dhcpcd net-tools zsh openssh neovim yay alacritty ranger xorg xorg-xinit noto-fonts-cjk adobe-source-code-pro-fonts fcitx-configtool nitrogen
+pacman -S --needed --noconfirm networkmanager dhcpcd net-tools zsh openssh neovim yay alacritty ranger xorg xorg-xinit noto-fonts-cjk adobe-source-code-pro-fonts fcitx fcitx-im fcitx-googlepinyin fcitx-configtool feh
 if [ -f "/bin/vim" ];then
 	rm /bin/vim
 fi
